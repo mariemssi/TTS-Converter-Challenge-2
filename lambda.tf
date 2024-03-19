@@ -6,8 +6,8 @@ provider "aws" {
 resource "aws_lambda_function" "texttospeech" {
   function_name = "texttospeech"
 
-  # The lambda  function needs a zid code in an S3 bucket 
-  # The S3 bucket is created here manually and the zip code is uploaded manually. You should change this with your own details
+  # The lambda  function needs the code in zipped file in an S3 bucket 
+  # The S3 bucket is created here manually and the zip file is uploaded manually. You should change this with your own details
   # This will automated in the next hands-on
   s3_bucket = "lambdacode17032024"
   s3_key    = "lambdacode.zip"
