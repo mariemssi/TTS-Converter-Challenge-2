@@ -17,4 +17,4 @@
 You need to provide the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY credentials to allow Terraform to connect and authenticate successfully to AWS. These credentials can be embedded directly into the Terraform code (although this is not considered best practice), 
 or you can leverage terminal environment variables or use a shared credentials file in the local file system. 
 
-You can find more details in [artcile1](https://medium.com/@lucas.ludicsa99/texttospeechconvertertext-to-speech-converter-using-aws-lambda-polly-and-api-gateway-bf814d2bbe84) and article2
+You can find more details in [article1](https://medium.com/@lucas.ludicsa99/texttospeechconvertertext-to-speech-converter-using-aws-lambda-polly-and-api-gateway-bf814d2bbe84) and [article2](https://medium.com/@meriemiag/text-to-speech-converter-challenge1-ba89607d936b)
