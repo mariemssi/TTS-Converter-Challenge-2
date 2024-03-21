@@ -1,5 +1,5 @@
 # Architecture of TTS Converter App (A simple AWS app to transform a text to speech)
-![image](https://github.com/mariemssi/TTS-Converter-Challenge-1/assets/69463864/9bd1722b-d5e7-4c6b-9362-2d1c1a30e554)
+![image](![image](https://github.com/mariemssi/TTS-Converter-Challenge-1/assets/69463864/663eb34f-9be1-4f24-80fc-31bfe91be859))
 
 # Steps to deploy the app
 
