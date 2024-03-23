@@ -11,8 +11,16 @@ on:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
-  #workflow_dispatch:
-
+  # Two options that we can run with this workflow: apply and destroy
+  workflow_dispatch:
+    inputs:
+      terraform_action:
+        type: choice
+        description: Select terraform action
+        options:
+        - apply
+        - destroy
+        required: true
 jobs:
   terraform:
     name: 'Terraform'
@@ -45,10 +53,13 @@ jobs:
       run: terraform plan 
 
     # On push to "main", build or change infrastructure according to Terraform configuration files
+    # Executed only if you choose the input option = apply
     - name: Terraform Apply
-      # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      if: ${{ github.event.inputs.terraform_action == 'apply' }}
       run: terraform apply -auto-approve 
 
+    # I add this option to have always the possibility to delete resources automatically after test
+    # Executed only if you choose the input option = destroy 
     - name: Terraform destroy
-      # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      if: ${{ github.event.inputs.terraform_action == 'destroy' }}
       run: terraform destroy -auto-approve 
