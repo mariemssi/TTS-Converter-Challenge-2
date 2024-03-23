@@ -22,8 +22,8 @@ terraform {
   // You can also enable state locking by using a DynamoDB table so changes at the same time will not be accepted - I don't add this as we don't have many contributers in the project
   // The dynamoDB table Key Schema Attribute name should be LockID.
   backend "s3" {
-    bucket         = "terrform-state-bucket-23032024" //change this bucket name by yours
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
+    bucket = "terrform-state-bucket-23032024" //change this bucket name by yours
+    key    = "terraform.tfstate"
+    region = "us-east-1"
   }
 }
