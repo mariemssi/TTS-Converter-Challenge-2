@@ -1,7 +1,3 @@
-# The aws region that you choose for your deployment
-provider "aws" {
-  region = "us-east-1"
-}
 
 resource "aws_lambda_function" "texttospeech" {
   function_name = "texttospeech"
