@@ -11,15 +11,18 @@ provider "aws" {
 
 terraform {
   // Ensures that everyone is using a specific Terraform version
+  //!!to choose - TODO
   required_version = ">= 0.14.9"
 
   // In challange1, we used a local terraform state. In this challage, we have to define a remote terraform backend as we use github actions to run terraform code
   // Github actions uses a runner for each job and different runner each time so the local state in this case will be lost after each workflow execution 
   // So, to have always the state of the resources deployed on aws, the state should be stored remotly. In our case, it is an S3 bucket where Terraform stores its state to keep track of the resources it manages
+  // I created manually the S3 bucket as it must be present when initializing terraform 
+  // You can manage it using a separate terraform configuration not part of the project (commented code in backend.tf)
   // You can also enable state locking by using a DynamoDB table so changes at the same time will not be accepted - I don't add this as we don't have many contributers in the project
   // The dynamoDB table Key Schema Attribute name should be LockID.
   backend "s3" {
-    bucket         = "terrform-state-bucket"
+    bucket         = "terrform-state-bucket-23032024" //change this bucket name by yours
     key            = "terraform.tfstate"
     region         = "us-east-1"
   }
