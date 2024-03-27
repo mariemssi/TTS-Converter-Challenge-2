@@ -3,21 +3,24 @@
 name: Lambda pipeline
 
 # Controls when the workflow will run
-# Triggers the workflow on push on the main branch concerning files in lambdacode directry
+# Triggers the workflow on push to the main branch affecting files in "lambdacode" directry
 on:
   push:
     branches: ["main"]
     paths: "lambdacode/**"
 
+# Defines environment variables
 env:
   # AWS secrets
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+# Defines jobs within the workflow# Defines jobs within the workflow
 jobs:
   terraform:
     name: "Terraform"
 
+    # Specifies the operating system environment for the job
     runs-on: ubuntu-latest
 
     steps:
@@ -29,21 +32,17 @@ jobs:
       - name: Zip lambda code
         run: |
           zip -r lambdacode.zip ./lambdacode
-          echo "The absolute path of lambdacode.zip is: $(realpath lambdacode.zip)"
 
-      # Upload to S3
+      # Uploads the zipped lambda code to an S3 created bucket
       - name: Upload to S3
         uses: hkusu/s3-upload-action@v2
-        id: upload # specify some ID for use in subsequent steps
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-east-1"
           aws-bucket: "lambdacode17032024"
           file-path: "lambdacode.zip"
-          destination-dir: "lambda/" #the upload is in artifacts/lambda in the bucket ...artificat is added automatically by this action
-          output-file-url: "true" # specify true
-
-      # Show URB Object
-      - name: Show URL
-        run: echo '${{ steps.upload.outputs.file-url }}'
+          # Specifies "the directory" in the bucket where the upload will be stored; note that "artifacts" prefix is added automatically
+          # The result is that the upload will be located at bucket/artifacts/lambda/
+          destination-dir: "lambda/"
+    
