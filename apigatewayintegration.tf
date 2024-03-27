@@ -13,6 +13,7 @@ resource "aws_apigatewayv2_route" "get_route" {
   target    = "integrations/${aws_apigatewayv2_integration.apigatewaytolambda.id}"
 }
 
+# Grants API Gateway permissions to invoke the Lambda function
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
