@@ -1,5 +1,5 @@
 # Retrieves information about the Lambda function zip file stored in an S3 bucket
-data "aws_s3_object" "lambda_zip" {
+data "aws_s3_bucket_object" "lambda_zip" {
   bucket = "lambdacode17032024"
   key    = "artifacts/lambda/lambdacode.zip"
 }
@@ -9,9 +9,9 @@ data "aws_s3_object" "lambda_zip" {
 resource "aws_lambda_function" "texttospeech" {
   function_name = "texttospeech"
 
-  s3_bucket         = data.aws_s3_object.lambda_zip.bucket
-  s3_key            = data.aws_s3_object.lambda_zip.key
-  s3_object_version = data.aws_s3_object.lambda_zip.version_id
+  s3_bucket         = data.aws_s3_bucket_object.lambda_zip.bucket
+  s3_key            = data.aws_s3_bucket_object.lambda_zip.key
+  s3_object_version = data.aws_s3_bucket_object.lambda_zip.version_id
 
   handler = "lambda.lambda_handler"
   runtime = "python3.8"
