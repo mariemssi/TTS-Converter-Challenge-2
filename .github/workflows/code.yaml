@@ -1,0 +1,49 @@
+# This is a workflow triggered by lambda code changes
+
+name: Lambda pipeline
+
+# Controls when the workflow will run
+# Triggers the workflow on push on the main branch concerning files in lambdacode directry
+on:
+  push:
+    branches: ["main"]
+    paths: "lambdacode/**"
+
+env:
+  # AWS secrets
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  terraform:
+    name: "Terraform"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Zip lambda code
+      - name: Zip lambda code
+        run: |
+          zip -r lambdacode.zip ./lambdacode
+          echo "The absolute path of lambdacode.zip is: $(realpath lambdacode.zip)"
+
+      # Upload to S3
+      - name: Upload to S3
+        uses: hkusu/s3-upload-action@v2
+        id: upload # specify some ID for use in subsequent steps
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-1"
+          aws-bucket: "lambdacode17032024"
+          file-path: "lambdacode.zip"
+          destination-dir: "lambda/" #the upload is in artifacts/lambda in the bucket ...artificat is added automatically by this action
+          output-file-url: "true" # specify true
+
+      # Show URB Object
+      - name: Show URL
+        run: echo '${{ steps.upload.outputs.file-url }}'
