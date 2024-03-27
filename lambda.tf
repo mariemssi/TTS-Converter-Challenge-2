@@ -1,5 +1,5 @@
 # Retrieves information about the Lambda function zip file stored in an S3 bucket
-data "aws_s3_bucket_object" "lambda_zip" {
+data "aws_s3_object" "lambda_zip" {
   bucket = "lambdacode17032024"
   key    = "artifacts/lambda/lambdacode.zip"
 }
