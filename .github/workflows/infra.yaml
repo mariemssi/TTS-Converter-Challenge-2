@@ -34,7 +34,7 @@ jobs:
     name: "TTS_Converter_Infra"
 
     # This job is launched only after or push of infra code changes in the main branch or after the success of lambda pipeline
-    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'push'
+    if: ${{! github.event.workflow_run.conclusion == 'failure'}}
 
     # Defines environment variables for the workflow
     env:
@@ -57,6 +57,13 @@ jobs:
         if: github.event_name == 'push'
         run: echo "run on push event"
 
+      - name: Run on push event
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "run on manual trigger"
+
+      - name: Get event_name
+        run: echo "triggered by Event name ${{ github.event_name }}"
+      
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
