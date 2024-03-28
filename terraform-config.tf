@@ -1,28 +1,26 @@
-# I add this file to organize more the terraform code
-# it will contains all infos about providers, terrform version 
-# some details here are copied from last challenge and others will be added
+# Purpose of this file is to better organize the Terraform code.
+# It will contain information about providers, Terraform version,
+# some details are copied from the previous challenge, and others will be added.
 
-# The aws region that you choose for your deployment
+# The AWS region selected for deployment.
 provider "aws" {
   region = "us-east-1"
 }
 
-
-
 terraform {
-  // Ensures that everyone is using a specific Terraform version
-  //!!to choose - TODO
+  # Ensures uniform usage of a specific Terraform version.
   required_version = ">= 0.14.9"
 
-  // In challange1, we used a local terraform state. In this challage, we have to define a remote terraform backend as we use github actions to run terraform code
-  // Github actions uses a runner for each job and different runner each time so the local state in this case will be lost after each workflow execution 
-  // So, to have always the state of the resources deployed on aws, the state should be stored remotly. In our case, it is an S3 bucket where Terraform stores its state to keep track of the resources it manages
-  // I created manually the S3 bucket as it must be present when initializing terraform 
-  // You can manage it using a separate terraform configuration not part of the project (commented code in backend.tf)
-  // You can also enable state locking by using a DynamoDB table so changes at the same time will not be accepted - I don't add this as we don't have many contributers in the project
-  // The dynamoDB table Key Schema Attribute name should be LockID.
+  # In challenge 1, a local Terraform state was used.
+  # For this challenge, a remote Terraform backend is defined to run Terraform code.
+  # GitHub Actions employs a runner for each job, and a different runner is used each time, 
+  # causing the local state to be lost after each workflow execution.
+  # Hence, to consistently maintain the state of AWS-deployed resources, the state should be stored remotely. 
+  # In our case, it's an S3 bucket where Terraform stores its state to track managed resources.
+  # I manually created the S3 bucket, as it must exist during Terraform initialization.
+  # Management of this bucket can be done using a separate Terraform configuration not part of the project 
   backend "s3" {
-    bucket = "terrform-state-bucket-23032024" //change this bucket name by yours
+    bucket = "terrform-state-bucket-23032024" # Change this bucket name to yours.
     key    = "terraform.tfstate"
     region = "us-east-1"
   }
