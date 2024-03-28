@@ -1,6 +1,6 @@
 # Retrieves information about the Lambda function zip file stored in an S3 bucket
 data "aws_s3_bucket_object" "lambda_zip" {
-  bucket = "lambdacode17032024"
+  bucket = "terrform-state-bucket-23032024"
   key    = "lambdacode.zip"
 }
 
