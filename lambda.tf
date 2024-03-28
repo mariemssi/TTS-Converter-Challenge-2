@@ -14,7 +14,7 @@ resource "aws_lambda_function" "texttospeech" {
   s3_object_version = data.aws_s3_bucket_object.lambda_zip.version_id
 
   # The handler must be name_of_lambda_code_file.name_of_your_code_handler 
-  handler = "lambda.lambda_handler"
+  handler = "lambdacode.lambda.lambda_handler"
   runtime = "python3.8"
 
   # Specifies the IAM role for the Lambda function
