@@ -44,5 +44,5 @@ jobs:
           file-path: "lambdacode.zip"
           # Specifies "the directory" in the bucket where the upload will be stored; note that "artifacts" prefix is added automatically
           # The result is that the upload will be located at bucket/artifacts/lambda/
-          destination-dir: "lambda/"
-    
+          destination-dir: "/"
+          bucket-root: "/"
