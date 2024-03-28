@@ -45,7 +45,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-east-1"
           aws-bucket: "lambdacode17032024"
-          file-path: "lambda.zip"
+          file-path: "lambdacode/lambda.zip"
           # Specifies "the directory" in the bucket where the upload will be stored; note that "artifacts" prefix is added automatically
           # The result is that the upload will be located at bucket/artifacts/lambda/
           destination-dir: "/"
