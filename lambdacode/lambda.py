@@ -35,4 +35,4 @@ def lambda_handler(event, context):
             'body': json.dumps(str(e))
         }
 
-#test 2 pipelines
+#test lambda code pipelines
