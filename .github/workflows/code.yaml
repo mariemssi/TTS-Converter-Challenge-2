@@ -31,9 +31,9 @@ jobs:
       # Zip lambda code
       - name: Zip lambda code
         run: |
-          pwd
           cd lambdacode
-          ls -la ./lambdacode
+          pwd
+          ls -la 
           zip -r lambda.zip .
           zipinfo ../lambda.zip
           
