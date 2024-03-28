@@ -1,6 +1,6 @@
 # Retrieves information about the Lambda function zip file stored in an S3 bucket
 data "aws_s3_bucket_object" "lambda_zip" {
-  bucket = "terrform-state-bucket-23032024"
+  bucket = "lambdacode17032024"
   key    = "lambdacode.zip"
 }
 
@@ -11,7 +11,7 @@ resource "aws_lambda_function" "texttospeech" {
 
   s3_bucket = data.aws_s3_bucket_object.lambda_zip.bucket
   s3_key    = data.aws_s3_bucket_object.lambda_zip.key
-  //s3_object_version = data.aws_s3_bucket_object.lambda_zip.version_id
+  s3_object_version = data.aws_s3_bucket_object.lambda_zip.version_id
 
   # The handler must be name_of_lambda_code_file.name_of_your_code_handler 
   handler = "lambda.lambda_handler"

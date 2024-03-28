@@ -31,7 +31,7 @@ jobs:
       # Zip lambda code
       - name: Zip lambda code
         run: |
-          zip -r lambdacode.zip ./lambdacode
+          zip -r lambdacode.zip ./lambdacode/lambda.py
 
       # Uploads the zipped lambda code to an S3 created bucket
       - name: Upload to S3
