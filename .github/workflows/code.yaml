@@ -29,11 +29,12 @@ jobs:
         uses: actions/checkout@v4
 
       # Zip lambda code
+      # If your function code has no dependencies, your .zip file contains only the .py file with your function’s handler code. 
+      # Use your preferred zip utility to create a .zip file with your .py file at the root.
+      # Source: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-create-no-dependencies
       - name: Zip lambda code
         run: |
           cd lambdacode
-          pwd
-          ls -la 
           zip -r lambda.zip .
           zipinfo lambda.zip
           
