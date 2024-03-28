@@ -35,7 +35,7 @@ jobs:
           pwd
           ls -la 
           zip -r lambda.zip .
-          zipinfo ../lambda.zip
+          zipinfo lambda.zip
           
       # Uploads the zipped lambda code to an S3 created bucket
       - name: Upload to S3
