@@ -35,4 +35,4 @@ def lambda_handler(event, context):
             'body': json.dumps(str(e))
         }
 
-#change message 05.14
+#change message 05.26
