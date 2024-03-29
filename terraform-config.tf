@@ -1,6 +1,5 @@
-# Purpose of this file is to better organize the Terraform code.
+# The purpose of this file is to better organize the Terraform code.
 # It will contain information about providers, Terraform version,
-# some details are copied from the previous challenge, and others will be added.
 
 # The AWS region selected for deployment.
 provider "aws" {

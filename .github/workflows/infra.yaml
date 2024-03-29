@@ -2,9 +2,9 @@
 
 name: TTS Converter App Infra pipeline
 
-# Controls when the workflow will run - three possible triggers
+# Controls when the workflow will run - three are 3 possible triggers
 on:
-  # Triggers the workflow on push events to the main branch, excluding changes to the "lambdacode" directory
+  # Triggers the workflow on push events to the main branch, excluding changes to the "lambdacode" directory and the readme file
   push:
     branches: ["main"]
     paths-ignore:
@@ -15,7 +15,7 @@ on:
   workflow_run:
     workflows: ["Lambda pipeline"]
     types:
-      - completed # It doesn't mean succeded so we need to add condition in the job
+      - completed # It doesn't mean a successful run so we need to add condition in the job
 
   # Allows manual triggering of the workflow from the Actions tab, providing options to deploy or destroy resources
   # Used to control better the creation and deletion of resources while testing
@@ -34,7 +34,7 @@ jobs:
   TTS_Converter_Infra:
     name: "TTS_Converter_Infra"
 
-    # This job is launched only after or push of infra code changes in the main branch or after the success of lambda pipeline
+    # This job is launched only after a push of infra code changes in the main branch or after the success of lambda pipeline
     if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
 
     # Defines environment variables for the workflow
@@ -58,12 +58,10 @@ jobs:
         if: github.event_name == 'push'
         run: echo "run on push event"
 
+      # Displays a message when the workflow is triggered by manually
       - name: Run on workflow_dispatch event
         if: github.event_name == 'workflow_dispatch'
         run: echo "run on manual trigger"
-
-      - name: Get event_name
-        run: echo "triggered by event name ${{ github.event_name }}"
 
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
@@ -86,12 +84,14 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
 
-      # Applies changes to infrastructure according to Terraform configuration files, triggered only if 'apply' is selected
+      # Applies changes to infrastructure according to Terraform configuration files
+      # Triggered only if the option 'Apply' is selected
       - name: Terraform Apply
         if: ${{ github.event.inputs.terraform_action == 'apply' }}
         run: terraform apply -auto-approve
 
-      # Destroys infrastructure, triggered only if 'destroy' is selected
+      # Destroys the infrastructure
+      # Triggered only if 'Destroy' option is selected
       - name: Terraform destroy
         if: ${{ github.event.inputs.terraform_action == 'destroy' }}
         run: terraform destroy -auto-approve

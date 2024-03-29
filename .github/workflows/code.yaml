@@ -3,7 +3,7 @@
 name: Lambda pipeline
 
 # Controls when the workflow will run
-# Triggers the workflow on push to the main branch affecting files in "lambdacode" directry
+# Triggers the workflow on push to the main branch affecting files in "lambdacode" directory
 on:
   push:
     branches: ["main"]
@@ -15,7 +15,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-# Defines jobs within the workflow# Defines jobs within the workflow
+# Defines jobs within the workflow
 jobs:
   terraform:
     name: "Terraform"
@@ -30,7 +30,6 @@ jobs:
 
       # Zip lambda code
       # If your function code has no dependencies, your .zip file contains only the .py file with your function’s handler code. 
-      # Use your preferred zip utility to create a .zip file with your .py file at the root.
       # Source: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-create-no-dependencies
       - name: Zip lambda code
         run: |
@@ -38,7 +37,7 @@ jobs:
           zip -r lambda.zip .
           zipinfo lambda.zip
           
-      # Uploads the zipped lambda code to an S3 created bucket
+      # Uploads the zipped lambda code to an S3 bucket that you choose for lambda code
       - name: Upload to S3
         uses: hkusu/s3-upload-action@v2
         with:
@@ -47,7 +46,7 @@ jobs:
           aws-region: "us-east-1"
           aws-bucket: "lambdacode17032024"
           file-path: "lambdacode/lambda.zip"
-          # Specifies "the directory" in the bucket where the upload will be stored; note that "artifacts" prefix is added automatically
-          # The result is that the upload will be located at bucket/artifacts/lambda/
+          # destination-dir specifies "the directory" in the bucket where the upload will be stored; 
+          # I choose that is directly uploaded in the bucket
           destination-dir: "/"
           bucket-root: "/"
