@@ -9,6 +9,7 @@ on:
     branches: ["main"]
     paths-ignore:
       - "lambdacode/**"
+      - "README.md"
 
   # Triggers the workflow after the completion of the "Lambda pipeline" workflow
   workflow_run:
