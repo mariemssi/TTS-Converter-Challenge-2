@@ -1,10 +1,11 @@
-# Architecture of TTS Converter App - Challenge 2 - GitHub actions workflows
+# TTS Converter App - Challenge 2 - GitHub actions workflows
 ![image](https://github.com/mariemssi/TTS-Converter-Challenge-2/assets/69463864/036a72b8-a398-487c-b06a-e0d862c9fad0)
 
 
 
+The second challenge involves creating GitHub Actions workflows to automate the deployment of infrastructure and Lambda code changes.
 
-# Steps to test the code
+# Steps to run the solution of challenge 2
 
 1. Clone the project
    
