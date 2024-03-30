@@ -52,4 +52,4 @@ The second challenge involves creating GitHub Actions workflows to automate the 
 12. Once testing is complete, select the "Destroy" option in the TTS Converter App Infra pipeline to tear down the resources.
 
 
-You can find more details [here](https://medium.com/@lucas.ludicsa99/texttospeechconvertertext-to-speech-converter-using-aws-lambda-polly-and-api-gateway-bf814d2bbe84) 
+You can find more details [here](https://medium.com/@meriemiag/text-to-speech-converter-challenge2-github-actions-workflows-16c59556e6c1) 
