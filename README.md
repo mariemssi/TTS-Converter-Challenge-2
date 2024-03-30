@@ -15,6 +15,9 @@ The second challenge involves creating GitHub Actions workflows to automate the 
    
    Enabling versioning on this bucket assigns a unique version ID to each uploaded file version. This versioning mechanism ensures that every update to the Lambda code 
    triggers a redeployment of the Lambda function.
+
+   The Lambda pipeline needs to share the zip file with the TTS Converter App Infra pipeline, and I chose to do it via an S3 bucket. As a remark, I tried using the GitHub Action "actions/download-artifact@v4". It works 
+   well for sharing data between jobs within the same workflow but doesn't work for different workflows.
   
 5. Update the bucket name and object key in "lambda.tf" and aws-bucket in the step "Upload to S3" in "code.yaml" by the bucket created in step 3
    
