@@ -9,7 +9,7 @@ The second challenge involves creating GitHub Actions workflows to automate the 
 
 1. Clone the project
    
-2. Create an S3 bucket for the remote backend and update the name of the bucket in "terraform-config.tf"
+2. Create an S3 bucket for the terraform remote backend and update the name of the bucket in "terraform-config.tf"
    
 3. Create a versioned S3 bucket for uploading zipped Lambda files (Artifact of lambda pipeline)
 
