@@ -11,7 +11,7 @@ The second challenge involves creating GitHub Actions workflows to automate the 
    
 2. Create an S3 bucket for the terraform remote backend and update the name of the bucket in "terraform-config.tf"
    
-3. Create a versioned S3 bucket for uploading zipped Lambda files (Artifact of lambda pipeline)
+3. Create a versioned S3 bucket for uploading zipped Lambda file (Artifact of lambda pipeline)
 
    The Lambda pipeline needs to share the zip file with the TTS Converter App Infra pipeline, and I choose to do it via an S3 bucket. As a remark, I tried using the GitHub Action "actions/download-artifact@v4". It works 
    well for sharing data between jobs within the same workflow but doesn't work for different workflows.
